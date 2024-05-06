@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students</title>
+</head>
+<body>
+    <h1>Students</h1>
+    <ul>
+        {% for student in students %}
+            <li>{{ student.name }} <form method="post" action="{{ url_for('delete_student', student_id=student.id) }}"><button type="submit">Delete</button></form></li>
+            <ul>
+                {% for grade in student.grades %}
+                    <li>{{ grade.subject }}: {{ grade.score }} <form method="post" action="{{ url_for('delete_grade', grade_id=grade.id) }}"><button type="submit">Delete</button></form></li>
+                {% endfor %}
+            </ul>
+            <a href="{{ url_for('add_grade', student_id=student.id) }}">Add Grade</a>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ url_for('add_student') }}">Add Student</a>
+</body>
+</html>
